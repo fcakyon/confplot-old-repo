@@ -139,7 +139,7 @@ def insert_totals(df_cm, pred_val_axis):
         _p = df_cm.iat[i,i]/sum_col[i]
         _q = df_cm.iat[i,i]/sum_lin[i]
         _f1 = 2*(_p*_q)/(_p+_q)
-        f1.append(_f1)
+        f1.append(0 if _f1!=_f1 else _f1)
 
     df_cm[xlbl] = sum_lin
     df_cm['F1-Score'] = f1
