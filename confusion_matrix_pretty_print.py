@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 """
 plot a pretty confusion matrix with seaborn
-Created on Mon Jun 25 14:17:37 2018
-@author: Wagner Cipriano - wagnerbhbr - gmail - CEFETMG / MMC
-REFerences:
+
+references:
   https://www.mathworks.com/help/nnet/ref/plotconfusion.html
   https://stackoverflow.com/questions/28200786/how-to-plot-scikit-learn-classification-report
   https://stackoverflow.com/questions/5821125/how-to-plot-confusion-matrix-with-string-axis-rather-than-integer-in-python
@@ -71,8 +69,8 @@ def configcell_text_and_colors(array_df, lin, col, oText, facecolors, posi, fz, 
         text_kwargs = dict(color='w', ha="center", va="center", gid='sum', fontproperties=font_prop)
         lis_txt = ['%d'%(cell_val), per_ok_s, '%.2f%%'%(per_err)]
         lis_kwa = [text_kwargs]
-        dic = text_kwargs.copy(); dic['color'] = 'g'; lis_kwa.append(dic);
-        dic = text_kwargs.copy(); dic['color'] = 'r'; lis_kwa.append(dic);
+        dic = text_kwargs.copy(); dic['color'] = 'lime'; lis_kwa.append(dic)
+        dic = text_kwargs.copy(); dic['color'] = 'salmon'; lis_kwa.append(dic)
         lis_pos = [(oText._x, oText._y-0.3), (oText._x, oText._y), (oText._x, oText._y+0.3)]
         for i in range(len(lis_txt)):
             newText = dict(x=lis_pos[i][0], y=lis_pos[i][1], text=lis_txt[i], kw=lis_kwa[i])
@@ -151,6 +149,7 @@ def pretty_plot_confusion_matrix(df_cm, annot=True, cmap="Oranges", fmt='.2f', f
 
     #this is for print allways in the same window
     fig, ax1 = get_new_fig('Conf matrix default', figsize)
+    fig.patch.set_facecolor('white')
 
     #thanks for seaborn
     ax = sn.heatmap(df_cm, annot=annot, annot_kws={"size": fz}, linewidths=lw, ax=ax1,
@@ -158,7 +157,7 @@ def pretty_plot_confusion_matrix(df_cm, annot=True, cmap="Oranges", fmt='.2f', f
 
     #set ticklabels rotation
     ax.set_xticklabels(ax.get_xticklabels(), rotation = 45, fontsize = 10)
-    ax.set_yticklabels(ax.get_yticklabels(), rotation = 25, fontsize = 10)
+    ax.set_yticklabels(ax.get_yticklabels(), rotation = -30, fontsize = 10, ha='left')
 
     # Turn off all the ticks
     for t in ax.xaxis.get_major_ticks():
